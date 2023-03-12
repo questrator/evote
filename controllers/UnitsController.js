@@ -10,12 +10,27 @@ class UnitsController {
     }
 
     static async addUnit(request, response) {
-        console.log("BODY -> ", request.body);
-        const result = await UnitsModel.addUnit(request.body.data.number);
+        const result = await UnitsModel.addUnit(request.body);
         if (response) {
             response.status(200).send(result);
         }
         else response.send(result, "add fail");
+    }
+
+    static async deleteUnit(request, response) {
+            const result = await UnitsModel.deleteUnit(request.body.unit_id);
+            if (result) {
+                response.send("delete done");
+            }
+            else response.send("delete fail");
+    }
+
+    static async updateUnit(request, response) {
+        const result = await UnitsModel.updateUnit(request.body);
+        if (result) {
+            response.send(result);
+        }
+        else response.send("update fail");
     }
 
 }
