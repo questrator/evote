@@ -5,17 +5,41 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./css/normalize.css">
+  <link rel="stylesheet" href="./css/style.css">
   <title>Помещения</title>
 </head>
 
 <body>
-  <div>Помещения</div>
+  <h1>Помещения</h1>
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th>id</th>
+        <th>номер</th>
+        <th>тип</th>
+        <th>площадь, м²</th>
+        <th>корпус</th>
+        <th>подъезд</th>
+        <th>этаж</th>
+      </tr>
+      <% if (units) { 
+        for (let unit of units) { %>
+      <tr>
+        <td><%= unit.unit_id %></td>
+        <td><%= unit.number %></td>
+        <td><%= unit.type_id %></td>
+        <td><%= unit.area %></td>
+        <td><%= unit.building %></td>
+        <td><%= unit.entrance %></td>
+        <td><%= unit.floor %></td>
+      </tr>
+      <% }
+    }
+    else "error"; %>
+    </thead>
+  </table>
 
-  <% if (result) { %>
-  <h2>
-    <%= result[0].area %>
-  </h2>
-  <% } else "error" ; %>
 
 </body>
 

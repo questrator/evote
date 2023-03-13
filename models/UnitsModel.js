@@ -19,7 +19,8 @@ class UnitModel {
             (error, result) => {
                 if (error) {
                     console.log(error);
-                    resolve(false);
+                    resolve(error);
+                    return error;
                 }
                 else resolve("unit added successfully");
             });

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./css/normalize.css">
+  <link rel="stylesheet" href="./css/style.css">
+  <title>Добавить помещение</title>
+</head>
+
+<body>
+  <h1>Добавить помещение</h1>
+  <% if (message) { %>
+    <div><%- message %></div>
+  <% } %>
+  <form action="/units/add" method="post">
+    <input type="text" name="number" id="" placeholder="номер">
+    <select name="type_id" id="" >
+        <option value="1">жилое</option>
+        <option value="2">нежилое</option>
+    </select>
+    <input type="text" name="area" id="" placeholder="площадь">
+    <input type="number" name="building" id="" placeholder="корпус" >
+    <input type="number" name="entrance" id="" placeholder="подъезд" >
+    <input type="number" name="floor" id="" placeholder="этаж" >
+    <input type="submit" value="Добавить">
+  </form>
+</body>
+
+</html>

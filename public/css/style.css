@@ -1,0 +1,40 @@
+* {
+    font-family: "Open Sans", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+h1 {
+    color:rgb(80, 80, 80);
+}
+
+.data-table {
+    border: 1px dashed rgb(121, 121, 121);
+    background-color: rgb(255, 255, 255);
+}
+
+.data-table th {
+    padding: 10px 20px;
+    background-color: rgb(47, 113, 146);
+    color:rgb(255, 255, 255);
+}
+
+.data-table td {
+    text-align: center;
+}
+
+.data-table tr:nth-child(2n + 1) {
+    background-color: rgba(0, 0, 0, .01);
+}
+.data-table tr:nth-child(2n) {
+    background-color: rgba(0, 0, 0, .1);
+}
+
+.data-table tr:hover {
+    background-color: rgba(133, 198, 241, 0.513);
+}
+
+.data-table td:first-child {
+    color: rgb(151, 151, 151) !important;
+    text-align: center;
+    font-size: 0.8rem;
+    max-width: 40px;
+}

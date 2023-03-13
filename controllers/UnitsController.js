@@ -3,20 +3,26 @@ const UnitsModel = require("../models/UnitsModel");
 class UnitsController {
 
     static async getUnits(request, response) {
-        const result = await UnitsModel.getUnits();
+        const units = await UnitsModel.getUnits();
         if (response) {
-            // response.send(result);
-            console.log(result);
-            response.render("units.ejs", {result});
+            response.render("units.ejs", {units});
         }
     }
 
-    static async addUnit(request, response) {
+    static async createUnit(request, response) {
         const result = await UnitsModel.addUnit(request.body);
-        if (response) {
-            response.status(200).send(result);
+        if (!result.errno) {
+            console.log("result???", result.errno);
+            response.status(200).render("unit-add.ejs", {message: "помещение добавлено", type: "info"});
         }
-        else response.send(result, "add fail");
+        else {
+            console.log("result!!!!", result);
+            response.render("unit-add.ejs", {message: `${result.sqlMessage}<br />${result.sql}`, type: "error"});
+        }
+    }
+
+    static async formUnit(request, response) {
+            response.render("unit-add.ejs", {message: null});
     }
 
     static async deleteUnit(request, response) {
