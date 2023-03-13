@@ -5,7 +5,9 @@ class UnitsController {
     static async getUnits(request, response) {
         const result = await UnitsModel.getUnits();
         if (response) {
-            response.send(result);
+            // response.send(result);
+            console.log(result);
+            response.render("units.ejs", {result});
         }
     }
 
