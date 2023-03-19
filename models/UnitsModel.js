@@ -4,7 +4,8 @@ class UnitModel {
 
     static async getUnits() {
         return new Promise(resolve => {
-            db.query("SELECT * FROM units", [], (error, result) => {
+            db.query("SELECT units.unit_id, units.number, units.type_id, unit_types.description, units.area, units.building, units.entrance, units.floor FROM units LEFT JOIN unit_types ON units.type_id = unit_types.unit_type_id WHERE units.active = 1;",
+            [], (error, result) => {
                 if (error) console.log(error);
                 else resolve(result);
             });
@@ -29,7 +30,7 @@ class UnitModel {
 
     static async deleteUnit(unit_id) {
         return new Promise(resolve => {
-            db.query("DELETE FROM units WHERE unit_id = ?", [unit_id],
+            db.query("UPDATE units SET active = 0 WHERE units.unit_id = ?", [unit_id],
             (error, result) => {
                 if (error) resolve(false);
                 else resolve("unit deleted");

@@ -38,3 +38,42 @@ h1 {
     font-size: 0.8rem;
     max-width: 40px;
 }
+
+.table-actions {
+    display: flex;
+    justify-content: space-evenly;
+    opacity: 0.5;
+    transition: all 0.3s ease;
+}
+
+.data-table tr:hover .table-actions{
+    opacity: 1;
+}
+
+.action-edit a, .action-delete a {
+    padding: 0 8px;
+    text-decoration-style: dotted;
+    text-decoration-line: underline;
+    text-decoration-thickness: 1px;
+    text-decoration-color: inherit;
+}
+
+.action-edit a {
+    color: gray;
+}
+
+.action-edit:hover a {
+    color: rgb(0, 58, 0);
+    text-decoration-color: transparent;
+    background-color: rgb(155, 255, 155);
+}
+
+.action-delete a {
+    color: rgb(177, 48, 48);
+}
+
+.action-delete:hover a {
+    color: rgb(255, 255, 255);
+    text-decoration-color: transparent;
+    background-color: rgb(255, 123, 123);
+}

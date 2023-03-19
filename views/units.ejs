@@ -5,13 +5,16 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="./css/normalize.css">
-  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="/css/normalize.css">
+  <link rel="stylesheet" href="/css/style.css">
   <title>Помещения</title>
 </head>
 
 <body>
-  <h1>Помещения</h1>
+  <div class="title">
+    <h1>Помещения</h1>
+    <div class="title_add">Добавить</div>
+  </div>
   <table class="data-table">
     <thead>
       <tr>
@@ -22,17 +25,24 @@
         <th>корпус</th>
         <th>подъезд</th>
         <th>этаж</th>
+        <th>действия</th>
       </tr>
       <% if (units) { 
         for (let unit of units) { %>
       <tr>
         <td><%= unit.unit_id %></td>
         <td><%= unit.number %></td>
-        <td><%= unit.type_id %></td>
+        <td><%= unit.description %></td>
         <td><%= unit.area %></td>
         <td><%= unit.building %></td>
         <td><%= unit.entrance %></td>
         <td><%= unit.floor %></td>
+        <td>
+          <div class="table-actions">
+            <div class="action-edit"><a href="/units/edit/<%= unit.unit_id %>">ред.</a></div>
+            <div class="action-delete"><a href="/units/del/<%= unit.unit_id %>">удал.</a></div>
+          </div>
+        </td>
       </tr>
       <% }
     }

@@ -10,7 +10,8 @@ router.get("/", (req, res, next) => {
 router.get("/units", UnitsController.getUnits);
 router.get("/units/add", UnitsController.formUnit);
 router.post("/units/add", UnitsController.createUnit);
-router.post("/units/delete", UnitsController.deleteUnit);
+router.get("/units/delete/:id", UnitsController.deleteUnit);
+router.post("/units/delete/:id", UnitsController.deleteUnit);
 router.post("/units/update", UnitsController.updateUnit);
 
 module.exports = router;

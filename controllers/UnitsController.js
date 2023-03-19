@@ -12,11 +12,9 @@ class UnitsController {
     static async createUnit(request, response) {
         const result = await UnitsModel.addUnit(request.body);
         if (!result.errno) {
-            console.log("result???", result.errno);
             response.status(200).render("unit-add.ejs", {message: "помещение добавлено", type: "info"});
         }
         else {
-            console.log("result!!!!", result);
             response.render("unit-add.ejs", {message: `${result.sqlMessage}<br />${result.sql}`, type: "error"});
         }
     }
