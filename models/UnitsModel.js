@@ -28,14 +28,47 @@ class UnitModel {
         });
     }
 
+    static async editUnit(unit_id) {
+        return new Promise(resolve => {
+            db.query("SELECT * FROM units WHERE units.unit_id = ?", [unit_id],
+            (error, result) => {
+                if (error) {
+                    console.log(error);
+                    resolve(error);
+                }
+                else {
+                    resolve(result);
+                }
+            });
+        });
+    }
+
+    static async updateUnit(unit) {
+        const {unit_id, number, type_id, area, building, entrance, floor} = unit;
+        console.log(unit);
+        return new Promise(resolve => {
+            db.query("UPDATE units SET unit_id = ?, number = ?, type_id = ?, area = ?, building = ?, entrance = ?, floor = ?, active = ? WHERE units.unit_id = ?", 
+            [number, type_id, area, building, entrance, floor, unit_id],
+            (error, result) => {
+                if (error) {
+                    console.log(error);
+                    resolve(error);
+                }
+                else {
+                    // console.log(result);
+                    resolve(result);
+                }
+            });
+        });
+    }
+
     static async deleteUnit(unit_id) {
         return new Promise(resolve => {
             db.query("UPDATE units SET active = 0 WHERE units.unit_id = ?", [unit_id],
             (error, result) => {
                 if (error) resolve(false);
                 else resolve("unit deleted");
-            }
-            );
+            });
         });
     }
 
@@ -46,8 +79,7 @@ class UnitModel {
             (error, result) => {
                 if (error) resolve(false);
                 else resolve(result);
-            }
-            );
+            });
         });
     }
 }

@@ -1,4 +1,4 @@
-* {
+body {
     font-family: "Open Sans", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
@@ -18,6 +18,8 @@ h1 {
 }
 
 .data-table td {
+    box-sizing: border-box;
+    padding: 0px 12px;
     text-align: center;
 }
 
@@ -42,7 +44,9 @@ h1 {
 .table-actions {
     display: flex;
     justify-content: space-evenly;
-    opacity: 0.5;
+    align-items: center;
+    height: 24px;
+    opacity: 0.3;
     transition: all 0.3s ease;
 }
 
@@ -51,15 +55,8 @@ h1 {
 }
 
 .action-edit a, .action-delete a {
-    padding: 0 8px;
-    text-decoration-style: dotted;
-    text-decoration-line: underline;
-    text-decoration-thickness: 1px;
-    text-decoration-color: inherit;
-}
-
-.action-edit a {
-    color: gray;
+    display: block;
+    height: 20px;
 }
 
 .action-edit:hover a {
@@ -76,4 +73,19 @@ h1 {
     color: rgb(255, 255, 255);
     text-decoration-color: transparent;
     background-color: rgb(255, 123, 123);
+}
+
+.icon-edit, .icon-delete {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background-size: cover;
+}
+
+.icon-edit {
+    background-image: url("../images/icon-edit.svg");
+}
+
+.icon-delete {
+    background-image: url("../images/icon-delete.svg");
 }
