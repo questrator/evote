@@ -15,8 +15,8 @@ class UnitModel {
     static async addUnit(unit) {
         const {number, type_id, area, building, entrance, floor} = unit;
         return new Promise(resolve => {
-            db.query("INSERT INTO units (number, type_id, area, building, entrance, floor) VALUES (?, ?, ?, ?, ?, ?)",
-            [number, type_id, area, building, entrance, floor],
+            db.query("INSERT INTO units (number, type_id, area, building, entrance, floor, created, updated) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+            [number, type_id, area, building, entrance, floor, new Date(), new Date],
             (error, result) => {
                 if (error) {
                     console.log(error);
@@ -28,7 +28,7 @@ class UnitModel {
         });
     }
 
-    static async editUnit(unit_id) {
+    static async getUnit(unit_id) {
         return new Promise(resolve => {
             db.query("SELECT * FROM units WHERE units.unit_id = ?", [unit_id],
             (error, result) => {
@@ -44,18 +44,18 @@ class UnitModel {
     }
 
     static async updateUnit(unit) {
-        const {unit_id, number, type_id, area, building, entrance, floor} = unit;
-        console.log(unit);
+        const {unit_id, number, type_id, area, building, entrance, floor, updated} = unit;
+        console.log("UM, updateUnit, unit ->", unit);
         return new Promise(resolve => {
-            db.query("UPDATE units SET unit_id = ?, number = ?, type_id = ?, area = ?, building = ?, entrance = ?, floor = ?, active = ? WHERE units.unit_id = ?", 
-            [number, type_id, area, building, entrance, floor, unit_id],
+            db.query("UPDATE units SET number = ?, type_id = ?, area = ?, building = ?, entrance = ?, floor = ?, updated = ? WHERE units.unit_id = ?", 
+            [number, type_id, area, building, entrance, floor, updated, unit_id],
             (error, result) => {
                 if (error) {
                     console.log(error);
                     resolve(error);
                 }
                 else {
-                    // console.log(result);
+                    console.log("res->", result);
                     resolve(result);
                 }
             });
@@ -68,17 +68,6 @@ class UnitModel {
             (error, result) => {
                 if (error) resolve(false);
                 else resolve("unit deleted");
-            });
-        });
-    }
-
-    static async updateUnit(unit) {
-        const {unit_id, number, type_id, area, building, entrance, floor} = unit;
-        return new Promise(resolve => {
-            db.query("UPDATE units SET number = ?, type_id = ?, area = ?, building = ?, entrance = ?, floor = ? WHERE unit_id = ?", [number, type_id, area, building, entrance, floor, unit_id], 
-            (error, result) => {
-                if (error) resolve(false);
-                else resolve(result);
             });
         });
     }

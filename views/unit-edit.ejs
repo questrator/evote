@@ -18,6 +18,7 @@
 
   <form action="/units/edit/<%= unit.unit_id %>" method="post">
     <input type="text" name="unit_id" style="display: none;" value="<%= unit.unit_id %>">
+    <input type="text" name="updated" style="display: none;" value="<%= Date.now() %>">
     <input type="text" name="number" id="" placeholder="номер" value="<%= unit.number %>">
     <select name="type_id" id="">
         <option value="1" <%- unit.type_id === 1 ? "selected" : null %>>жилое</option>

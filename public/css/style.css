@@ -47,11 +47,13 @@ h1 {
     align-items: center;
     height: 24px;
     opacity: 0.3;
+    filter: contrast(0.9) brightness(0.9) grayscale(1) opacity(0.9);
     transition: all 0.3s ease;
 }
 
 .data-table tr:hover .table-actions{
     opacity: 1;
+    filter: contrast(1) brightness(1) grayscale(0) opacity(1);
 }
 
 .action-edit a, .action-delete a {
@@ -59,20 +61,12 @@ h1 {
     height: 20px;
 }
 
-.action-edit:hover a {
-    color: rgb(0, 58, 0);
-    text-decoration-color: transparent;
-    background-color: rgb(155, 255, 155);
+.icon-edit, .icon-delete {
+    filter: opacity(0.6);
 }
 
-.action-delete a {
-    color: rgb(177, 48, 48);
-}
-
-.action-delete:hover a {
-    color: rgb(255, 255, 255);
-    text-decoration-color: transparent;
-    background-color: rgb(255, 123, 123);
+.icon-edit:hover, .icon-delete:hover {
+    filter: opacity(1);
 }
 
 .icon-edit, .icon-delete {
