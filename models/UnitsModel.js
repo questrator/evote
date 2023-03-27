@@ -4,7 +4,7 @@ class UnitModel {
 
     static async getUnits() {
         return new Promise(resolve => {
-            db.query("SELECT units.unit_id, units.number, units.type_id, unit_types.description, units.area, units.building, units.entrance, units.floor FROM units LEFT JOIN unit_types ON units.type_id = unit_types.unit_type_id WHERE units.active = 1;",
+            db.query("SELECT units.unit_id, units.number, units.type_id, unit_types.description, units.area, units.building, units.entrance, units.floor FROM units LEFT JOIN unit_types ON units.type_id = unit_types.unit_type_id WHERE units.active = 1",
             [], (error, result) => {
                 if (error) console.log(error);
                 else resolve(result);
@@ -68,6 +68,16 @@ class UnitModel {
             (error, result) => {
                 if (error) resolve(false);
                 else resolve("unit deleted");
+            });
+        });
+    }
+
+    static async getTrashUnits() {
+        return new Promise(resolve => {
+            db.query("SELECT units.unit_id, units.number, units.type_id, unit_types.description, units.area, units.building, units.entrance, units.floor FROM units LEFT JOIN unit_types ON units.type_id = unit_types.unit_type_id WHERE units.active = 0",
+            [], (error, result) => {
+                if (error) console.log(error);
+                else resolve(result);
             });
         });
     }
