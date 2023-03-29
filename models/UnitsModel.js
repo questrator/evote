@@ -44,8 +44,8 @@ class UnitModel {
     }
 
     static async updateUnit(unit) {
-        const {unit_id, number, type_id, area, building, entrance, floor, updated} = unit;
-        console.log("UM, updateUnit, unit ->", unit);
+        const {unit_id, number, type_id, area, building, entrance, floor} = unit;
+        const updated = new Date().toISOString().slice(0, 19).replace('T', ' ');
         return new Promise(resolve => {
             db.query("UPDATE units SET number = ?, type_id = ?, area = ?, building = ?, entrance = ?, floor = ?, updated = ? WHERE units.unit_id = ?", 
             [number, type_id, area, building, entrance, floor, updated, unit_id],
@@ -78,6 +78,16 @@ class UnitModel {
             [], (error, result) => {
                 if (error) console.log(error);
                 else resolve(result);
+            });
+        });
+    }
+
+    static async restoreUnit(unit_id) {
+        return new Promise(resolve => {
+            db.query("UPDATE units SET active = 1 WHERE units.unit_id = ?", [unit_id],
+            (error, result) => {
+                if (error) resolve(false);
+                else resolve("unit restored");
             });
         });
     }

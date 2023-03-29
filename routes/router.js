@@ -14,5 +14,6 @@ router.get("/units/edit/:unit_id", UnitsController.getUnit);
 router.post("/units/edit/:unit_id", UnitsController.updateUnit);
 router.get("/units/del/:unit_id", UnitsController.deleteUnit);
 router.get("/units/trash", UnitsController.getTrashUnits);
+router.get("/units/restore/:unit_id", UnitsController.restoreUnit);
 
 module.exports = router;

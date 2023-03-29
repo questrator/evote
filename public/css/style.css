@@ -31,7 +31,7 @@ h1 {
 }
 
 .data-table tr:hover {
-    background-color: rgba(133, 198, 241, 0.513);
+    background-color: rgba(173, 255, 92, 0.513);
 }
 
 .data-table td:first-child {
@@ -61,19 +61,16 @@ h1 {
     height: 20px;
 }
 
-.icon-edit, .icon-delete {
-    filter: opacity(0.6);
-}
-
-.icon-edit:hover, .icon-delete:hover {
-    filter: opacity(1);
-}
-
-.icon-edit, .icon-delete {
+.icon-edit, .icon-delete, .icon-restore, .icon-trash {
     display: inline-block;
     width: 20px;
     height: 20px;
     background-size: cover;
+    filter: opacity(0.6);
+}
+
+.icon-edit:hover, .icon-delete:hover, .icon-delete:hover, .icon-trash:hover {
+    filter: opacity(1);
 }
 
 .icon-edit {
@@ -82,4 +79,12 @@ h1 {
 
 .icon-delete {
     background-image: url("../images/icon-delete.svg");
+}
+
+.icon-restore {
+    background-image: url("../images/icon-restore.svg");
+}
+
+.icon-trash {
+    background-image: url("../images/icon-trash.svg");
 }

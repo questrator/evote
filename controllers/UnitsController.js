@@ -57,6 +57,13 @@ class UnitsController {
         else response.send("error");
     }
 
+    static async restoreUnit(request, response) {
+        const result = await UnitsModel.restoreUnit(request.params.unit_id);
+        if (result) {
+            response.redirect("/units/trash/");
+        }
+        else response.send("restore fail");
+    }
 }
 
 module.exports = UnitsController;

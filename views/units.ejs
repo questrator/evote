@@ -40,8 +40,8 @@
         <td><%= unit.floor %></td>
         <td>
           <div class="table-actions">
-            <div class="action-edit"><a href="/units/edit/<%= unit.unit_id %>"><i class="icon-edit"></i></a></div>
-            <div class="action-delete"><a href="/units/del/<%= unit.unit_id %>"><i class="icon-delete"></i></a></div>
+            <div class="action-edit"><a href="/units/edit/<%= unit.unit_id %>" data-id="<%= unit.unit_id %>" data-action="edit"><i class="icon-edit"></i></a></div>
+            <div class="action-delete"><a href="/units/del/<%= unit.unit_id %>"><i class="icon-trash"></i></a></div>
           </div>
         </td>
       </tr>
@@ -51,6 +51,14 @@
     </thead>
   </table>
 
+  <script>
+    const edits = document.querySelectorAll("a[data-action='edit']");
+    console.log(edits)
+    edits.forEach(e => e.addEventListener("click", (event) => {
+      event.preventDefault();
+      console.log(event.target.parentNode)
+    }))
+  </script>
 
 </body>
 
