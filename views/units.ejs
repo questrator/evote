@@ -27,10 +27,12 @@
         <th><span>подъезд</span></th>
         <th><span>этаж</span></th>
         <th><span>действия</span></th>
-      </tr>
+      </tr>      
+    </thead>
+    <tbody>
       <% if (units) { 
         for (let unit of units) { %>
-      <tr>
+      <tr data-id="<%= unit.unit_id %>">
         <td><%= unit.unit_id %></td>
         <td><%= unit.number %></td>
         <td><%= unit.description %></td>
@@ -48,7 +50,7 @@
       <% }
     }
     else "error"; %>
-    </thead>
+    </tbody>
   </table>
 
   <script>
@@ -57,6 +59,9 @@
     edits.forEach(e => e.addEventListener("click", (event) => {
       event.preventDefault();
       console.log(event.target.parentNode)
+      const tr = document.querySelector(`tr[data-id='${event.target.parentNode.dataset.id}']`)
+      console.log(tr)
+      tr.style.backgroundColor = "#aa44ee77"
     }))
   </script>
 
