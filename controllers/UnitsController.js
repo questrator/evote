@@ -1,11 +1,13 @@
 const UnitsModel = require("../models/UnitsModel");
+const nav = require("../config/nav");
+const section = "units";
 
 class UnitsController {
 
     static async getUnits(request, response) {
-        const units = await UnitsModel.getUnits();
+        const data = await UnitsModel.getUnits();
         if (response) {
-            response.render("units.ejs", { units });
+            response.render("units.ejs", { data, nav, section });
         }
     }
 
@@ -41,18 +43,18 @@ class UnitsController {
         else response.send(`update fail ${result}`);
     }
 
-    static async deleteUnit(request, response) {
-        const result = await UnitsModel.deleteUnit(request.params.unit_id);
+    static async disableUnit(request, response) {
+        const result = await UnitsModel.disableUnit(request.params.unit_id);
         if (result) {
             response.redirect("/units");
         }
-        else response.send(`delete fail ${result}`);
+        else response.send(`disable fail ${result}`);
     }
 
     static async getTrashUnits(request, response) {
-        const units = await UnitsModel.getTrashUnits();
-        if (units) {
-            response.render("units-trash.ejs", {units});
+        const data = await UnitsModel.getTrashUnits();
+        if (data) {
+            response.render("units-trash.ejs", { data, nav, section });
         }
         else response.send("error");
     }

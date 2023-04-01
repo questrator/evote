@@ -1,5 +1,53 @@
 body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 100%;
+    width: 100%;
+    min-height: 100vh;
+    background-color: #c0c0c0;
     font-family: "Open Sans", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    max-width: 1200px;
+    width: 1200px;
+    background-color: #ffffff;
+}
+
+.nav {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 10px;
+    box-sizing: border-box;
+    padding: 0px 40px;
+    width: 100%;
+    height: 50px;
+    background-color: rgb(136, 207, 255);
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+    height: 32px;
+    padding: 0px 24px;
+    text-decoration: underline 1px dotted;
+}
+
+.nav-item[data-selected="true"] {
+    text-decoration: none;
+    background-color: rgb(253, 253, 253);
+}
+
+.nav-item:hover {
+    text-decoration: none;
+    background-color: #fdfdfdaa;
 }
 
 h1 {
@@ -56,12 +104,12 @@ h1 {
     filter: contrast(1) brightness(1) grayscale(0) opacity(1);
 }
 
-.action-edit a, .action-delete a {
+.action-edit a, .action-disable a {
     display: block;
     height: 20px;
 }
 
-.icon-edit, .icon-delete, .icon-restore, .icon-trash {
+.icon-edit, .icon-delete, .icon-restore, .icon-disable {
     display: inline-block;
     width: 20px;
     height: 20px;
@@ -69,7 +117,7 @@ h1 {
     filter: opacity(0.6);
 }
 
-.icon-edit:hover, .icon-delete:hover, .icon-delete:hover, .icon-trash:hover {
+.icon-edit:hover, .icon-delete:hover, .icon-delete:hover, .icon-disable:hover {
     filter: opacity(1);
 }
 
@@ -85,6 +133,6 @@ h1 {
     background-image: url("../images/icon-restore.svg");
 }
 
-.icon-trash {
-    background-image: url("../images/icon-trash.svg");
+.icon-disable {
+    background-image: url("../images/icon-disable.svg");
 }

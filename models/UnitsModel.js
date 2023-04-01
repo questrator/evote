@@ -62,12 +62,12 @@ class UnitModel {
         });
     }
 
-    static async deleteUnit(unit_id) {
+    static async disableUnit(unit_id) {
         return new Promise(resolve => {
             db.query("UPDATE units SET active = 0 WHERE units.unit_id = ?", [unit_id],
             (error, result) => {
                 if (error) resolve(false);
-                else resolve("unit deleted");
+                else resolve("unit disabled");
             });
         });
     }

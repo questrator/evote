@@ -1,57 +1,41 @@
-<!DOCTYPE html>
-<html lang="ru">
+<%- include("header.ejs", {section, nav}) %>
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="/css/normalize.css">
-  <link rel="stylesheet" href="/css/style.css">
-  <title>Помещения</title>
-</head>
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th><span>id</span></th>
+                <th><span>номер</span></th>
+                <th><span>тип</span></th>
+                <th><span>площадь, м²</span></th>
+                <th><span>корпус</span></th>
+                <th><span>подъезд</span></th>
+                <th><span>этаж</span></th>
+                <th><span>действия</span></th>
+            </tr>
+        </thead>
+        <tbody>
+            <% if (data) { 
+          for (let unit of data) { %>
+            <tr data-id="<%= unit.unit_id %>">
+                <td><%= unit.unit_id %></td>
+                <td><%= unit.number %></td>
+                <td><%= unit.description %></td>
+                <td><%= unit.area %></td>
+                <td><%= unit.building %></td>
+                <td><%= unit.entrance %></td>
+                <td><%= unit.floor %></td>
+                <td>
+                    <div class="table-actions">
+                        <div class="action-edit"><a href="/units/edit/<%= unit.unit_id %>" data-id="<%= unit.unit_id %>" data-action="edit"><i class="icon-edit"></i></a></div>
+                        <div class="action-disable"><a href="/units/disable/<%= unit.unit_id %>"><i class="icon-disable"></i></a></div>
+                    </div>
+                </td>
+            </tr>
+            <% }
+      }
+      else "error"; %>
+        </tbody>
+    </table>
+</div>
 
-<body>
-  <div class="title">
-    <h1>Помещения</h1>
-    <div class="title_add"><a href="/units/">Активные помещения</a></div>
-    <div class="title_add"><a href="/units/add/">Добавить помещение</a></div>
-  </div>
-  <table class="data-table">
-    <thead>
-      <tr>
-        <th><span>id</span></th>
-        <th><span>номер</span></th>
-        <th><span>тип</span></th>
-        <th><span>площадь, м²</span></th>
-        <th><span>корпус</span></th>
-        <th><span>подъезд</span></th>
-        <th><span>этаж</span></th>
-        <th><span>действия</span></th>
-      </tr>
-      <% if (units) { 
-        for (let unit of units) { %>
-      <tr>
-        <td><%= unit.unit_id %></td>
-        <td><%= unit.number %></td>
-        <td><%= unit.description %></td>
-        <td><%= unit.area %></td>
-        <td><%= unit.building %></td>
-        <td><%= unit.entrance %></td>
-        <td><%= unit.floor %></td>
-        <td>
-          <div class="table-actions">
-            <div class="action-edit"><a href="/units/restore/<%= unit.unit_id %>"><i class="icon-restore"></i></a></div>
-            <div class="action-delete"><a href="/units/del/<%= unit.unit_id %>"><i class="icon-delete"></i></a></div>
-          </div>
-        </td>
-      </tr>
-      <% }
-    }
-    else "error"; %>
-    </thead>
-  </table>
-
-
-</body>
-
-</html>
+<%- include("footer.ejs") %>
