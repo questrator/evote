@@ -39,11 +39,10 @@ class OwnerModel {
             return `${rand()}-${rand()}-${rand()}`;
         }
 
-
-
         return new Promise(resolve => {
+            const date = new Date().toISOString().slice(0, 19).replace('T', ' ');
             db.query("INSERT INTO owners (type_id, lastname, name, midname, password, passport, phone, active, created, updated) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
-            [type_id, lastname, name, midname, getPassword(), passport, phone, 1, new Date(), new Date],
+            [type_id, lastname, name, midname, getPassword(), passport, phone, 1, date, date],
             (error, result) => {
                 if (error) {
                     console.log(error);
