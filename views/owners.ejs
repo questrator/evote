@@ -1,0 +1,50 @@
+<%- include("header.ejs", {section, nav}) %>
+
+
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th><span>id</span></th>
+                <th><span>тип</span></th>
+                <th><span>ФИО / название</span></th>
+                <th><span>паспорт / ОГРН</span></th>
+                <th><span>телефон</span></th>
+                <th><span>действия</span></th>
+            </tr>
+        </thead>
+        <tbody>
+            <% if (data) { 
+          for (let owner of data) { %>
+            <tr data-id="<%= owner.owner_id %>">
+                <td><%= owner.owner_id %></td>
+                <td><%= owner.description %></td>
+                <td><%= `${owner.lastname} ${owner.name} ${owner.midname}`.trim() %></td>
+                <td><%= owner.passport %></td>
+                <td><%= owner.phone %></td>
+                <td>
+                    <div class="table-actions">
+                        <div class="action-edit"><a href="/owners/edit/<%= owner.owner_id %>" data-id="<%= owner.owner_id %>" data-action="edit"><i class="icon-edit"></i></a></div>
+                        <div class="action-disable"><a href="/owners/disable/<%= owner.owner_id %>"><i class="icon-disable"></i></a></div>
+                    </div>
+                </td>
+            </tr>
+            <% }
+      }
+      else "error"; %>
+        </tbody>
+    </table>
+</div>
+
+<script>
+    const edits = document.querySelectorAll("a[data-action='edit']");
+    console.log(edits)
+    edits.forEach(e => e.addEventListener("click", (event) => {
+        event.preventDefault();
+        console.log(event.target.parentNode)
+        const tr = document.querySelector(`tr[data-id='${event.target.parentNode.dataset.id}']`)
+        console.log(tr)
+        tr.style.backgroundColor = "#aa44ee77"
+    }))
+</script>
+
+<%- include("footer.ejs") %>

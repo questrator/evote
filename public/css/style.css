@@ -55,6 +55,7 @@ h1 {
 }
 
 .data-table {
+    align-self: center;
     border: 1px dashed rgb(121, 121, 121);
     background-color: rgb(255, 255, 255);
 }

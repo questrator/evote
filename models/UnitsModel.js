@@ -1,6 +1,6 @@
 const db = require("../config/db");
 
-class UnitModel {
+class UnitsModel {
 
     static async getUnits() {
         return new Promise(resolve => {
@@ -93,4 +93,4 @@ class UnitModel {
     }
 }
 
-module.exports = UnitModel;
+module.exports = UnitsModel;
