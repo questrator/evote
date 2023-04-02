@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/normalize.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <title>Добавить собственника</title>
+</head>
+
+<body>
+    <header>
+        <h1>Добавить собственника</h1>
+        <div class=""><a href="/owners/">Все собственники</a></div>
+    </header>
+    <% if (message) { %>
+    <div><%- message %></div>
+    <% } %>
+    <form action="/owners/add" method="post">
+        <select name="type_id" id="">
+            <option value="1" selected>физ. лицо</option>
+            <option value="2">юр. лицо</option>
+        </select>
+        <input type="text" name="lastname" id="" placeholder="фамилия">
+        <input type="text" name="name" id="" placeholder="имя / название">
+        <input type="text" name="midname" id="" placeholder="отчество">
+        <input type="text" name="passport" id="" placeholder="паспорт">
+        <input type="text" name="phone" id="" placeholder="телефон">
+        <input type="submit" value="Добавить">
+    </form>
+</body>
+
+</html>
