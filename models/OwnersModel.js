@@ -15,22 +15,8 @@ class OwnerModel {
     }
 
     static async addOwner(owner) {
+        const date = new Date().toISOString().slice(0, 19).replace('T', ' ');
         const {type_id, lastname, name, midname, passport, phone} = owner;
-        let passwords;
-        new Promise(resolve => {
-            db.query("SELECT password FROM owners", [],
-            (error, result) => {
-                if (error) {
-                    console.log(error);
-                    resolve(error);
-                }
-                else {
-                    passwords = result;
-                    resolve("OK");
-                };
-            });
-        });
-        console.log("!!!", passwords);
 
         function getPassword() {
             function rand() {
@@ -39,18 +25,34 @@ class OwnerModel {
             return `${rand()}-${rand()}-${rand()}`;
         }
 
-        return new Promise(resolve => {
-            const date = new Date().toISOString().slice(0, 19).replace('T', ' ');
-            db.query("INSERT INTO owners (type_id, lastname, name, midname, password, passport, phone, active, created, updated) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
-            [type_id, lastname, name, midname, getPassword(), passport, phone, 1, date, date],
+        return new Promise((resolve, reject) => {
+            const result = db.query("SHOW TABLE STATUS FROM `evote` LIKE 'owners';", [],
             (error, result) => {
                 if (error) {
                     console.log(error);
                     resolve(error);
                 }
-                else resolve("owner added successfully");
+                else {
+                    resolve(result);
+                };
+            });
+        }).then((value) => {
+            new Promise((resolve, reject) => {
+                db.query("INSERT INTO owners (type_id, lastname, name, midname, password, passport, phone, active, created, updated) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);",
+                [type_id, lastname, name, midname, `${value[0].Auto_increment}--${getPassword()}`, passport, phone, 1, date, date],
+                (error, result) => {
+                    if (error) {
+                        console.log(error);
+                        reject(error);
+                    }
+                    else {
+                        console.log(result);
+                        resolve("owner added successfully")
+                    };
+                });
             });
         });
+        
     }
 
     static async getOwner(owner_id) {
