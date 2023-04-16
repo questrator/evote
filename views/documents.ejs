@@ -1,0 +1,56 @@
+<%- include("header.ejs", {section, nav}) %>
+
+
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th><span>id</span></th>
+                <th><span>№</span></th>
+                <th><span>название</span></th>
+                <th><span>дата</span></th>
+                <th><span>собственник</span></th>
+                <th><span>помещение</span></th>
+                <th><span>номер</span></th>
+                <th><span>доля</span></th>
+                <th><span>действия</span></th>
+            </tr>
+        </thead>
+        <tbody>
+            <% if (data) { 
+          for (let i = 0; i < data.length; i++) { %>
+            <tr data-id="<%= data[i].document_id %>">
+                <td><%= data[i].document_id %></td>
+                <td><%= i + 1 %></td>
+                <td><%= data[i].title %></td>
+                <td><%= new Date(data[i].date).toLocaleDateString("ru-RU") %></td>
+                <td><%= `${data[i].lastname} ${data[i].name} ${data[i].midname}`.trim() %></td>
+                <td><%= data[i].type %></td>
+                <td><%= data[i].number %></td>
+                <td><%= data[i].fraction %></td>
+                <td>
+                    <div class="table-actions">
+                        <div class="action-edit"><a href="/documents/edit/<%= data[i].document_id %>" data-id="<%= data[i].document_id %>" data-action="edit"><i class="icon-edit"></i></a></div>
+                        <div class="action-disable"><a href="/documents/disable/<%= data[i].document_id %>"><i class="icon-disable"></i></a></div>
+                    </div>
+                </td>
+            </tr>
+            <% }
+      }
+      else "error"; %>
+        </tbody>
+    </table>
+</div>
+
+<script>
+    const edits = document.querySelectorAll("a[data-action='edit']");
+    console.log(edits)
+    edits.forEach(e => e.addEventListener("click", (event) => {
+        event.preventDefault();
+        console.log(event.target.parentNode)
+        const tr = document.querySelector(`tr[data-id='${event.target.parentNode.dataset.id}']`)
+        console.log(tr)
+        tr.style.backgroundColor = "#aa44ee77"
+    }))
+</script>
+
+<%- include("footer.ejs") %>

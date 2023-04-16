@@ -40,6 +40,20 @@ const nav = {
                 url: "/trash"
             }
         }
+    },
+    meetings: {
+        name: "Собрания",
+        url: "/meetings",
+        subnav: {
+            add: {
+                name: "Добавить собрание",
+                url: "/add"
+            },
+            trash: {
+                name: "Удалённые собрания",
+                url: "/trash"
+            }
+        }
     }
 };
 
