@@ -15,8 +15,11 @@ class DocumentsController {
 
     static async createDocument(request, response) {
         const result = await DocumentsModel.addDocument(request.body);
-        if (!result.errno) {
-            response.status(200).render("document-add.ejs", { message: "добавлено createDocument", type: "info" });
+        console.log(request.body);
+        const units = await UnitsModel.getUnits();
+        const owners = await OwnersModel.getOwners();
+        if (!units.errno && !owners.errno && !result.errno) {
+            response.status(200).render("document-add.ejs", { units, owners, message: "добавлено createDocument", type: "info" });
         }
         else {
             response.render("document-add.ejs", { message: `${result.sqlMessage}<br />${result.sql}`, type: "error" });
@@ -26,9 +29,8 @@ class DocumentsController {
     static async formDocument(request, response) {
         const units = await UnitsModel.getUnits();
         const owners = await OwnersModel.getOwners();
-        console.log(JSON.stringify(units))
         if (!units.errno && !owners.errno) {
-            response.status(200).render("document-add.ejs", { units: units, owners, message: "добавлено formDocument", type: "info" });
+            response.status(200).render("document-add.ejs", { units, owners, message: null, type: "info" });
         }
         response.render("document-add.ejs", { message: null });
     }
