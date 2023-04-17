@@ -4,7 +4,6 @@
     <table class="data-table">
         <thead>
             <tr>
-                <th><span>id</span></th>
                 <th><span>№</span></th>
                 <th><span>название</span></th>
                 <th><span>дата</span></th>
@@ -19,7 +18,6 @@
             <% if (data) { 
           for (let i = 0; i < data.length; i++) { %>
             <tr data-id="<%= data[i].document_id %>">
-                <td><%= data[i].document_id %></td>
                 <td><%= i + 1 %></td>
                 <td><%= data[i].title %></td>
                 <td><%= new Date(data[i].date).toLocaleDateString("ru-RU") %></td>

@@ -1,5 +1,7 @@
 const DocumentsModel = require("../models/DocumentsModel");
 const nav = require("../config/nav");
+const UnitsModel = require("../models/UnitsModel");
+const OwnersModel = require("../models/OwnersModel");
 const section = "documents";
 
 class DocumentsController {
@@ -14,21 +16,27 @@ class DocumentsController {
     static async createDocument(request, response) {
         const result = await DocumentsModel.addDocument(request.body);
         if (!result.errno) {
-            response.status(200).render("owner-add.ejs", { message: "помещение добавлено", type: "info" });
+            response.status(200).render("document-add.ejs", { message: "добавлено createDocument", type: "info" });
         }
         else {
-            response.render("owner-add.ejs", { message: `${result.sqlMessage}<br />${result.sql}`, type: "error" });
+            response.render("document-add.ejs", { message: `${result.sqlMessage}<br />${result.sql}`, type: "error" });
         }
     }
 
     static async formDocument(request, response) {
-        response.render("owner-add.ejs", { message: null });
+        const units = await UnitsModel.getUnits();
+        const owners = await OwnersModel.getOwners();
+        console.log(JSON.stringify(units))
+        if (!units.errno && !owners.errno) {
+            response.status(200).render("document-add.ejs", { units: units, owners, message: "добавлено formDocument", type: "info" });
+        }
+        response.render("document-add.ejs", { message: null });
     }
 
     static async getDocument(request, response) {
-        const owners = await DocumentsModel.getDocument(request.params.owner_id);
-        if (owners) {
-            response.render("owner-edit.ejs", { owner: owners[0] });
+        const documents = await DocumentsModel.getDocument(request.params.document_id);
+        if (documents) {
+            response.render("document-edit.ejs", { document: documents[0] });
         }
         else response.send("edit fail");
     }
@@ -38,15 +46,15 @@ class DocumentsController {
         console.log("UC, updateDocument, result ->", request.body);
         if (result) {
             console.log(result);
-            response.redirect("/owners");
+            response.redirect("/documents");
         }
         else response.send(`update fail ${result}`);
     }
 
     static async disableDocument(request, response) {
-        const result = await DocumentsModel.disableDocument(request.params.owner_id);
+        const result = await DocumentsModel.disableDocument(request.params.document_id);
         if (result) {
-            response.redirect("/owners");
+            response.redirect("/documents");
         }
         else response.send(`disable fail ${result}`);
     }
@@ -54,15 +62,15 @@ class DocumentsController {
     static async getTrashDocuments(request, response) {
         const data = await DocumentsModel.getTrashDocuments();
         if (data) {
-            response.render("owners-trash.ejs", { data, nav, section });
+            response.render("documents-trash.ejs", { data, nav, section });
         }
         else response.send("error");
     }
 
     static async restoreDocument(request, response) {
-        const result = await DocumentsModel.restoreDocument(request.params.owner_id);
+        const result = await DocumentsModel.restoreDocument(request.params.document_id);
         if (result) {
-            response.redirect("/owners/trash/");
+            response.redirect("/documents/trash/");
         }
         else response.send("restore fail");
     }

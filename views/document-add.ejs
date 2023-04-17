@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/normalize.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/modules/tom-select/dist/css/tom-select.min.css">
+    <script src="/modules/tom-select/dist/js/tom-select.complete.min.js"></script>
+    <title>Добавить документ</title>
+</head>
+
+<body>
+    <header>
+        <h1>Добавить документ</h1>
+        <div class=""><a href="/documents/">Все документы</a></div>
+    </header>
+    <% if (message) { %>
+    <div><%- message %></div>
+    <% } %>
+    <form action="/documents/add" method="post">
+        <input type="text" name="title" id="" placeholder="название и номер документа">
+        <input type="date" name="date" id="">
+        <input name="owner_id" id="owners" />
+        <input name="unit_id" id="units" />
+        <input type="number" name="fraction_numerator" id="" value="1" min="1"> /
+        <input type="number" name="fraction_denumerator" id="" value="1" min="1">
+        <input type="submit" value="Добавить">
+    </form>
+    <script data-units="<%= JSON.stringify(units) %>" data-owners="<%= JSON.stringify(owners) %>">
+        const units = JSON.parse(document.currentScript.dataset.units);
+        const owners = JSON.parse(document.currentScript.dataset.owners);
+        console.log(owners);
+        const unitsOptions = [...units].map(unit => {
+            unit.text = unit.number;
+            unit.value = unit.unit_id;
+            return unit;
+        });
+        const ownersOptions = [...owners].map(owner => {
+            owner.text = `${owner.lastname} ${owner.name} ${owner.midname}`.trim();
+            owner.value = owner.owner_id;
+            return owner;
+        });
+        const unitsConfig = {
+            options: unitsOptions,
+            maxItems: 1,
+            placeholder: "помещение"
+        };
+        const ownersConfig = {
+            options: ownersOptions,
+            maxItems: 1,
+            placeholder: "собственник"
+        };
+        new TomSelect('#units', unitsConfig);
+        new TomSelect('#owners', ownersConfig);
+    </script>
+</body>
+
+</html>

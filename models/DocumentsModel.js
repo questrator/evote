@@ -8,26 +8,18 @@ class DocumentModel {
             [], (error, result) => {
                 if (error) console.log(error);
                 else {
-                    console.log(result)
                     resolve(result);
                 }
             });
         });
     }
 
-    static async addDocument(owner) {
-        const date = new Date().toISOString().slice(0, 19).replace('T', ' ');
-        const {type_id, lastname, name, midname, passport, phone} = owner;
-
-        function getPassword() {
-            function rand() {
-                return Math.trunc(Math.random() * (10000 - 1000) + 1000);
-            }
-            return `${rand()}-${rand()}-${rand()}`;
-        }
+    static async addDocument(document) {
+        const currentDate = new Date().toISOString().slice(0, 19).replace('T', ' ');
+        const {title, date, owner_id, unit_id, fraction_numerator, fraction_denumerator} = document;
 
         return new Promise((resolve, reject) => {
-            const result = db.query("SHOW TABLE STATUS FROM `evote` LIKE 'owners';", [],
+            const result = db.query("", [],
             (error, result) => {
                 if (error) {
                     console.log(error);
@@ -37,23 +29,7 @@ class DocumentModel {
                     resolve(result);
                 };
             });
-        }).then((value) => {
-            new Promise((resolve, reject) => {
-                db.query("INSERT INTO owners (type_id, lastname, name, midname, password, passport, phone, active, created, updated) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);",
-                [type_id, lastname, name, midname, `${value[0].Auto_increment}--${getPassword()}`, passport, phone, 1, date, date],
-                (error, result) => {
-                    if (error) {
-                        console.log(error);
-                        reject(error);
-                    }
-                    else {
-                        console.log(result);
-                        resolve("owner added successfully")
-                    };
-                });
-            });
-        });
-        
+        });        
     }
 
     static async getDocument(owner_id) {
