@@ -19,22 +19,24 @@ class DocumentModel {
         const {title, date, owner_id, unit_id, fraction_numerator, fraction_denumerator} = document;
 
         return new Promise((resolve, reject) => {
-            const result = db.query("", [],
+            const result = db.query("INSERT INTO documents (title, date, owner_id, unit_id, fraction, active, created, updated) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+            [title, date, owner_id, unit_id, `${fraction_numerator}/${fraction_denumerator}`, 1, currentDate, currentDate],
             (error, result) => {
                 if (error) {
                     console.log(error);
                     resolve(error);
                 }
                 else {
+                    console.log(1, result)
                     resolve(result);
                 };
             });
         });        
     }
 
-    static async getDocument(owner_id) {
+    static async getDocument(document_id) {
         return new Promise(resolve => {
-            db.query("SELECT * FROM owners WHERE documents.owner_id = ?", [owner_id],
+            db.query("SELECT * FROM owners WHERE documents.document_id = ?", [document_id],
             (error, result) => {
                 if (error) {
                     console.log(error);
@@ -47,8 +49,8 @@ class DocumentModel {
         });
     }
 
-    static async updateDocument(owner) {
-        const {owner_id, number, type_id, area, building, entrance, floor} = owner;
+    static async updateDocument(document) {
+        const {owner_id, number, type_id, area, building, entrance, floor} = document;
         const updated = new Date().toISOString().slice(0, 19).replace('T', ' ');
         return new Promise(resolve => {
             db.query("UPDATE owners SET number = ?, type_id = ?, area = ?, building = ?, entrance = ?, floor = ?, updated = ? WHERE documents.owner_id = ?", 

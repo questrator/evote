@@ -29,6 +29,7 @@
         <input type="number" name="fraction_denumerator" id="" value="1" min="1">
         <input type="submit" value="Добавить">
     </form>
+
     <script data-units="<%= JSON.stringify(units) %>" data-owners="<%= JSON.stringify(owners) %>">
         const units = JSON.parse(document.currentScript.dataset.units);
         const owners = JSON.parse(document.currentScript.dataset.owners);
@@ -56,6 +57,7 @@
         new TomSelect('#units', unitsConfig);
         new TomSelect('#owners', ownersConfig);
     </script>
+
 </body>
 
 </html>
