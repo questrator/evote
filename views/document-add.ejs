@@ -20,14 +20,13 @@
     <% if (message) { %>
     <div><%- message %></div>
     <% } %>
-    <form action="/documents/add" method="post">
-        <input type="text" name="title" id="" placeholder="название и номер документа">
-        <input type="date" name="date" id="">
-        <input name="owner_id" id="owners" />
-        <input name="unit_id" id="units" />
-        <input type="number" name="fraction_numerator" id="" value="1" min="1"> /
-        <input type="number" name="fraction_denumerator" id="" value="1" min="1">
-        <input type="submit" value="Добавить">
+    <form action="/documents/add" method="post" style="display: flex; flex-direction: column;">
+        <div><input type="text" name="title" id="" placeholder="название и номер документа" required>
+        <input type="date" name="date" id="" required></div>
+        <div><input name="owner_id" id="owners" required/></div>
+        <div><input name="unit_id" id="units" required/></div>
+        <div><input type="number" name="fraction_numerator" id="" value="1" min="1" required> / <input type="number" name="fraction_denumerator" id="" value="1" min="1" required></div>
+        <div><input type="submit" value="Добавить"></div>
     </form>
 
     <script data-units="<%= JSON.stringify(units) %>" data-owners="<%= JSON.stringify(owners) %>">
