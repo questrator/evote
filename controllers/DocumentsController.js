@@ -1,7 +1,7 @@
 const DocumentsModel = require("../models/DocumentsModel");
-const nav = require("../config/nav");
 const UnitsModel = require("../models/UnitsModel");
 const OwnersModel = require("../models/OwnersModel");
+const nav = require("../config/nav");
 const section = "documents";
 
 class DocumentsController {
